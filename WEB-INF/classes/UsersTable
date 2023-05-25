@@ -1,5 +1,0 @@
-CREATE TABLE `~/Desktop/FullStack_Java_JS_App`.`Users`(
-	`token` INTEGER UNSIGNED NOT NULL,
-	`string` VARCHAR(250), 
-	PRIMARY KEY (`token`))
-	ENGINE = InnoDB;
