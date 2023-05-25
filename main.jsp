@@ -33,30 +33,46 @@
 	    <% 
 
 	    String randomString = (String) request.getAttribute("random_string");
-	    out.print("<h1>" + randomString + "</h1>");
+	    out.print("<h1 id=\"randString\">" + randomString + "</h1>");
 	  
 	    %>
-	    <input id="sequence" type="text" required>
-      <input type="submit" value="submit">
+	    <input id="sequence" type="text" value="" required>
+      <input id="fButton" type="submit" value="submit" disabled>
     </form>
+    <h1>Resultado: <p id="result"></p></h1>
   </body>
   <script>
-    const pasteBox = document.getElementById("sequence");
-    pasteBox.onpaste = e => {
+    const formButton = document.getElementById("fButton");
+    const strInput = document.getElementById("sequence");
+    const randomStr = document.getElementById("randString");
+    formButton.disabled = true;
+    strInput.value = "";
+    function validateString(){
+       if (strInput.value == randomStr.innerHTML)
+         formButton.disabled = false;
+       else
+         formButton.disabled = true;
+    } 
+    strInput.onpaste = e => {
       e.preventDefault();
       return false;
     };
+    strInput.onkeyup = e => {
+      strInput.value = strInput.value.toUpperCase();
+      validateString();
+      return true;
+    }
   </script>
   <script>
     const formulario = document.getElementById("form");
     formulario.onsubmit = async (e) => {
       e.preventDefault();
-      let response = await fetch('/Verify', {
+      let response = await fetch('/FullStack_Java_JS_App/Verify', {
         method: 'POST',
         body: new FormData(formulario)
       });
       resultado = await response.json();
-      document.getElementById("strings").innerHTM = resultado.msg;
+      document.getElementById("result").innerHTML = resultado.msg;
     };
   </script>
 </html>

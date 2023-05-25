@@ -16,5 +16,14 @@
 	    <url-pattern>/</url-pattern>
     </servlet-mapping>
   
+    <servlet>
+      <servlet-name>Validate</servlet-name>
+      <servlet-class>web.Validate</servlet-class>
+    </servlet>
   
+    <servlet-mapping>
+	    <servlet-name>Validate</servlet-name>
+	    <url-pattern>/Verify</url-pattern>
+    </servlet-mapping>
+
 </web-app>
