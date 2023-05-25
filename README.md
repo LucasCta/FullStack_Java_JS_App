@@ -5,6 +5,9 @@ Tools:
  MySQL
  TomCat
  Javascript
- Html/Css
+ HTML/CSS
  Java
+ Serverlets
+ AJAX
+ JSON
 
