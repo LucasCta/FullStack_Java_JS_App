@@ -14,12 +14,16 @@ public class AcessoBanco {
 
 	public static Connection conectar() throws SQLException {
 		Connection con = null;
-		Class.forName("com.mysql.jdbc.Driver");
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			System.out.println("Error in driver");
+		}
 		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/captchaDatabase", "lucas", "123@Teste");
 		return con;
 	}
 
-	public static boolean desconectar(Connection con, PreparedStatement ps, ResultSet SQLExceptiSQLExceptionrs)
+	public static boolean desconectar(Connection con, PreparedStatement ps, ResultSet rs)
 			throws SQLException {
 		if (rs != null) {
 			rs.close();

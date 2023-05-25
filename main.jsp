@@ -28,7 +28,7 @@
     </style>
   </head>
   <body>
-	  <form id="form" action="salvar" method="post">
+	  <form id="form" autocomplete="off" action="salvar" method="post">
 	    <h1 class="wow">Welcome! Please copy the text below to proceed:</h1>
 	    <% 
 
@@ -36,7 +36,7 @@
 	    out.print("<h1 id=\"randString\">" + randomString + "</h1>");
 	  
 	    %>
-	    <input id="sequence" type="text" value="" required>
+	    <input id="sequence" type="text" name="string" value="" required>
       <input id="fButton" type="submit" value="submit" disabled>
     </form>
     <h1>Resultado: <p id="result"></p></h1>

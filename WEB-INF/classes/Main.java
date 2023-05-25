@@ -27,9 +27,10 @@ public class Main extends HttpServlet {
 
 		ResultSet rs = null;
 		PreparedStatement ps = null;
-		Connection connection = AcessoBanco.conectar();
+		Connection connection;
 
 		try {
+			connection = AcessoBanco.conectar();
 			connection.setAutoCommit(false);
 			String consultar = "select * from users where token=?";
 			ps = connection.prepareStatement(consultar);
@@ -38,20 +39,16 @@ public class Main extends HttpServlet {
 			if (!rs.next()) {
 				String inserir = "insert into users(token,string) values(?,?)";
 				ps = connection.prepareStatement(inserir);
+				ps.setString(1, ID);
 				ps.setString(2, strResponse);
+				ps.executeUpdate();
 				connection.commit();
 			} else {
 				strResponse = rs.getString("string");
 			}
-		} catch (SQLException e) {
-			try {
-				connection.rollback();
-				System.out.println("Successfully rolled back changes from the database!");
-			} catch (SQLException e1) {
-				System.out.println("Could not rollback updates " + e1.getMessage());
-			}
-		} finally {
 			AcessoBanco.desconectar(connection, ps, rs);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
 		}
 
 		request.setAttribute("random_string", strResponse);
